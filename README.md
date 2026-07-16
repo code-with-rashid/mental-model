@@ -98,6 +98,9 @@ manual copy under its own `.claude/skills/mental-model/`, the project-level copy
 wins for the bare `/mental-model` command (project skills take priority over
 plugin skills with the same name). The plugin is still reachable explicitly at
 `/mental-model:mental-model`, but having both around is confusing for no benefit.
+A project-scope `.claude/skills/` copy also only loads after you've accepted
+Claude Code's workspace-trust dialog for that folder — `claude plugin list` will
+call this out explicitly if it finds one that hasn't loaded yet.
 
 </details>
 
