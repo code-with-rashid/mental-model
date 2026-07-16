@@ -1,0 +1,8 @@
+{
+  "name": "mental-model",
+  "description": "A Claude Code skill that builds a correct, source-grounded mental model of how code actually works — instead of a confident-sounding guess.",
+  "owner": { "name": "Rashid Mahmood" },
+  "plugins": [
+    { "name": "mental-model", "source": "./skills/mental-model" }
+  ]
+}

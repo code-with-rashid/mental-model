@@ -25,17 +25,91 @@ Ask an AI assistant "how does our webhook retry logic work?" and you'll often ge
 
 ## Install
 
-Copy the skill into your project or personal skills directory:
+### Recommended: as a plugin
 
-```bash
-# Project-level (shared with your team via git)
-cp -r mental-model .claude/skills/
+Inside a Claude Code session, in any project:
 
-# Or personal (available across all your projects)
-cp -r mental-model ~/.claude/skills/
+```
+/plugin marketplace add code-with-rashid/mental-model
+/plugin install mental-model@mental-model
 ```
 
-Claude Code picks it up automatically — no restart needed for project-level skills in most setups; personal skills apply on the next session.
+Then run `/reload-plugins` (or start a fresh `claude` session) — a plugin installed
+mid-session doesn't retroactively load into that session's context, so the skill
+won't trigger yet until you do. Confirm with `/plugin list`, or `claude plugin list`
+from a regular terminal.
+
+By default this installs at **user scope** (available in every project). To scope it
+to just the current project instead, run the equivalent from a terminal:
+
+```bash
+claude plugin marketplace add code-with-rashid/mental-model --scope project
+claude plugin install mental-model@mental-model --scope project
+```
+
+To remove it later: `/plugin uninstall mental-model@mental-model`.
+
+<details>
+<summary>Alternative: manual copy (no plugin system)</summary>
+
+This is a folder with a `SKILL.md` — no build step, no dependencies. **Clone this
+repo first**, then copy `skills/mental-model/` into a `.claude/skills/` directory.
+
+Use this if you'd rather not use the plugin system, or want to read/vet the skill's
+contents before trusting it in a project — a skill's instructions run with whatever
+tool access you grant it, so reviewing it first is reasonable practice either way.
+
+#### macOS / Linux (bash/zsh)
+
+```bash
+git clone https://github.com/code-with-rashid/mental-model.git ~/mental-model
+
+# per-project (recommended)
+mkdir -p /path/to/your-repo/.claude/skills
+cp -r ~/mental-model/skills/mental-model /path/to/your-repo/.claude/skills/
+
+# per-user (available in every project, instead of per-project)
+mkdir -p ~/.claude/skills
+cp -r ~/mental-model/skills/mental-model ~/.claude/skills/
+```
+
+#### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/code-with-rashid/mental-model.git $HOME\mental-model
+
+# per-project
+New-Item -ItemType Directory -Force -Path "C:\path\to\your-repo\.claude\skills" | Out-Null
+Copy-Item -Recurse -Force "$HOME\mental-model\skills\mental-model" "C:\path\to\your-repo\.claude\skills\"
+
+# per-user
+New-Item -ItemType Directory -Force -Path "$HOME\.claude\skills" | Out-Null
+Copy-Item -Recurse -Force "$HOME\mental-model\skills\mental-model" "$HOME\.claude\skills\"
+```
+
+Only the copied `skills/mental-model` folder matters; the rest of the clone (this
+README, the examples, the license) can be deleted afterward, or kept around so
+`git pull` can fetch future updates before you re-copy it.
+
+#### If you install it both ways
+
+Don't — pick one. If a project ends up with both the plugin installed *and* a
+manual copy under its own `.claude/skills/mental-model/`, the project-level copy
+wins for the bare `/mental-model` command (project skills take priority over
+plugin skills with the same name). The plugin is still reachable explicitly at
+`/mental-model:mental-model`, but having both around is confusing for no benefit.
+
+</details>
+
+### If natural-language phrases don't trigger it
+
+Skill auto-invocation is Claude deciding your request matches a skill's
+description — it's a judgment call, not a guarantee, and it competes with every
+other skill you have installed. If "give me context to understand X" doesn't fire
+it: confirm you reloaded after installing (see above), and if you have a lot of
+other skills/plugins installed, run `/doctor` to check whether `mental-model`'s
+description is being truncated from the context budget. Either way, typing
+`/mental-model` explicitly always works regardless of auto-detection.
 
 ## Example
 

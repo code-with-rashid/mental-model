@@ -10,6 +10,8 @@ description: >-
   "is this an explicit action or automatic?", "is my assumption correct?")
   rather than to change, fix, or plan it.
 allowed-tools: Read, Grep, Glob, Task, WebFetch, WebSearch
+version: 1.0.0
+license: MIT
 ---
 
 # Build a mental model

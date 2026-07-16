@@ -1,0 +1,9 @@
+{
+  "name": "mental-model",
+  "description": "Explain a concept, feature, ticket, or implementation in plain language, grounded in verified source — separating how it works today from what it's meant to become, and flagging assumptions instead of guessing.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": { "name": "Rashid Mahmood" },
+  "homepage": "https://github.com/code-with-rashid/mental-model",
+  "keywords": ["explain", "documentation", "code-comprehension", "onboarding"]
+}
