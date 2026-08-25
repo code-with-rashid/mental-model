@@ -82,15 +82,16 @@ first, explicitly pause, and confirm before doing anything else.
 
 ## Method
 
-- This is an *understanding* task: **read-only.** The `allowed-tools` list on
-  this skill enforces that — it has no write/edit access, so it physically
-  cannot modify code, even by accident.
+- This is an *understanding* task: **read-only.** Never edit or write files as
+  part of this skill — not even a note or scratch file — regardless of
+  whether the host tool technically permits it. (On Claude Code, the
+  `allowed-tools` list above also enforces this at the platform level.)
 - Scale the digging to the question. A single concept may need one file; a
-  behavior that spans many files warrants a broader search. For that, delegate
-  the fact-finding via the `Task` tool to a read-only search subagent (e.g. an
-  `Explore`-type agent) and ask it to return the *conclusion* — the specific
-  files/lines that matter and what they show — not a pile of raw file
-  contents.
+  behavior that spans many files warrants a broader search. If the host tool
+  supports delegating to a read-only search sub-agent (e.g. Claude Code's
+  `Task` tool with an `Explore`-type agent), use that and ask it to return the
+  *conclusion* — the specific files/lines that matter and what they show —
+  not a pile of raw file contents. Otherwise, search directly.
 - Prefer a few well-chosen specifics (the one config line, the one check, the
   one branch that decides everything) over exhaustive coverage.
 - A short table, a two-branch contrast, or a tiny before/after often carries a
