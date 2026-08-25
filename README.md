@@ -1,8 +1,10 @@
 # mental-model
 
-> A Claude Code skill that stops "explain how this works" answers from quietly mixing guesses with facts — it grounds every claim in your actual code, keeps "how it works today" separate from "how it's supposed to work," and tells you which parts it's not sure about.
+> A portable [Agent Skill](https://agentskills.io) that stops "explain how this works" answers from quietly mixing guesses with facts — it grounds every claim in your actual code, keeps "how it works today" separate from "how it's supposed to work," and tells you which parts it's not sure about. Works in Claude Code, Cursor, Codex CLI, and any other Agent-Skills-compatible tool.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+Part of the [Agent Skills catalog](https://github.com/code-with-rashid/agent-skills) — browse all skills and their install steps for every tool.
 
 ## The problem
 
@@ -15,7 +17,7 @@ Ask an AI assistant "how does our webhook retry logic work?" and you'll often ge
 - Anchors the explanation in one concrete, named example that gets reused as the explanation goes deeper.
 - Explicitly separates "how it works today" from "what it's meant to become" — the single most common way a mental model goes wrong.
 - Ends by listing the assumptions the explanation rests on and asks you to correct any that are off.
-- Is read-only by design (enforced via `allowed-tools`, not just instructions) — it will not modify code, even if the explanation surfaces something that looks like a bug.
+- Is read-only by design — the skill's own instructions never edit or write files, even if the explanation surfaces something that looks like a bug. On Claude Code specifically, this is also enforced at the platform level via `allowed-tools`.
 
 **What it explicitly does NOT do:**
 - Fix bugs or debug failures — it explains, it doesn't change anything.
@@ -103,6 +105,13 @@ Claude Code's workspace-trust dialog for that folder — `claude plugin list` wi
 call this out explicitly if it finds one that hasn't loaded yet.
 
 </details>
+
+### Other tools (Cursor, Codex CLI, ...)
+
+This skill is a standard `SKILL.md` package with no Claude-Code-only dependencies, so
+it installs the same way any Agent Skill does. See the
+[catalog's install guide](https://github.com/code-with-rashid/agent-skills#install)
+for exact steps in Cursor, Codex CLI, and other tools.
 
 ### If natural-language phrases don't trigger it
 
