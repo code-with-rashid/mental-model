@@ -17,7 +17,7 @@ Ask an AI assistant "how does our webhook retry logic work?" and you'll often ge
 - Anchors the explanation in one concrete, named example that gets reused as the explanation goes deeper.
 - Explicitly separates "how it works today" from "what it's meant to become" — the single most common way a mental model goes wrong.
 - Ends by listing the assumptions the explanation rests on and asks you to correct any that are off.
-- Is read-only by design — the skill's own instructions never edit or write files, even if the explanation surfaces something that looks like a bug. On Claude Code specifically, this is also enforced at the platform level via `allowed-tools`.
+- Is read-only by design — the skill's own instructions never edit or write files, even if the explanation surfaces something that looks like a bug. Its `allowed-tools` list pre-approves only read/search tools so they run without permission prompts; edit tools still go through your normal permission checks.
 
 **What it explicitly does NOT do:**
 - Fix bugs or debug failures — it explains, it doesn't change anything.

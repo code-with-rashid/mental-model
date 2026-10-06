@@ -9,9 +9,10 @@ description: >-
   understand…", "build my mental model of…", "how does X work internally?",
   "is this an explicit action or automatic?", "is my assumption correct?")
   rather than to change, fix, or plan it.
-allowed-tools: Read, Grep, Glob, Task, WebFetch, WebSearch
-version: 1.0.0
+allowed-tools: Read Grep Glob WebFetch WebSearch
 license: MIT
+metadata:
+  version: "1.0.1"
 ---
 
 # Build a mental model
@@ -84,12 +85,13 @@ first, explicitly pause, and confirm before doing anything else.
 
 - This is an *understanding* task: **read-only.** Never edit or write files as
   part of this skill — not even a note or scratch file — regardless of
-  whether the host tool technically permits it. (On Claude Code, the
-  `allowed-tools` list above also enforces this at the platform level.)
+  whether the host tool technically permits it. (The `allowed-tools` list
+  above only pre-approves read-only tools so they run without prompts; it
+  does not block edit tools, so this rule is what keeps the skill read-only.)
 - Scale the digging to the question. A single concept may need one file; a
   behavior that spans many files warrants a broader search. If the host tool
   supports delegating to a read-only search sub-agent (e.g. Claude Code's
-  `Task` tool with an `Explore`-type agent), use that and ask it to return the
+  `Explore` agent), use that and ask it to return the
   *conclusion* — the specific files/lines that matter and what they show —
   not a pile of raw file contents. Otherwise, search directly.
 - Prefer a few well-chosen specifics (the one config line, the one check, the
